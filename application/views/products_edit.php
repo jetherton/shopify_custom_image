@@ -57,6 +57,7 @@
 	echo Form::open(NULL, array('id'=>'edit_product_form', 'enctype'=>'multipart/form-data')); 
 	echo Form::hidden('action','edit', array('id'=>'action'));
 	echo Form::hidden('order_id',$data['order_id'], array('id'=>'order_id'));
+	echo Form::hidden('company_id',$data['company_id'], array('id'=>'company_id'));
 	echo '<table><tr><td>';
 	echo Form::label('title', __('Title').": ");
 	echo '</td><td>';

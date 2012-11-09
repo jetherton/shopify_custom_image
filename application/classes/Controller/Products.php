@@ -101,6 +101,7 @@ class Controller_Products extends Controller_Admin {
 					//new cat or existing cat?
 					if($id == 0)
 					{
+						$_POST['image'] = $_FILES['image']['name'];
 						$product = ORM::factory('Product');
 					}
 					else
@@ -206,7 +207,7 @@ class Controller_Products extends Controller_Admin {
 	 
 	 	if ($file = Upload::save($image, NULL, $directory))
 	 	{
-	 		$filename = $product->company_id.'-'.$product->id.'.jpg';
+	 		$filename = $product->company_id.'-'.$product->id.'.png';
 	 		
 	 		if(file_exists($directory.$filename))
 	 		{
