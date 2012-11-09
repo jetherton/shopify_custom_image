@@ -22,7 +22,7 @@ function Uploader(elementId, company_id, product_id)
 	
 	
 	//define the base URL for everything
-	this.urlBase = "http://localhost/shopify_custom_image/";
+	this.urlBase = "http://ethertontech.com/dev/superimpose/";
 	
 	//store the input from the user
 	this.company_id = company_id;
