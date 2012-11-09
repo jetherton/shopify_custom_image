@@ -18,7 +18,9 @@ class Controller_Frmupload extends Controller_Main {
 		
 		$order = null;
 		$company_id = intval($_GET['c']);
-		$product_id = intval($_GET['p']);
+		$product_id = isset($_GET['p']) ? $_GET['p']: 0;
+		$shopify_product_id = isset($_GET['sp']) ? $_GET['sp']: 0;
+		
 		$order_id = isset($_POST['order_id']) ? intval($_POST['order_id']): 0;
 		$guid = isset($_GET['g']) ? $_GET['g']: 0;
 
@@ -31,7 +33,24 @@ class Controller_Frmupload extends Controller_Main {
 				exit;
 			}
 		}
-		$product = ORM::factory('Product', $product_id);
+		
+		if($product_id !== 0)
+		{
+			$product = ORM::factory('Product', $product_id);
+			$shopify_product_id = $product->variant_id;
+		}
+		else
+		{
+			$product = ORM::factory('Product')
+				->where('variant_id', '=', $shopify_product_id)
+				->find();
+			$product_id = $product->id;
+		}
+		
+		if(!$product->loaded())
+		{
+			exit;
+		}
 
 		if($_POST)
 		{

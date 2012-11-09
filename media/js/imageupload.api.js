@@ -35,7 +35,7 @@ function Uploader(elementId, company_id, product_id)
 	var cssNode = document.createElement('link');
 	cssNode.type = 'text/css';
 	cssNode.rel = 'stylesheet';
-	cssNode.href = this.urlBase+"frmupload/css?c="+company_id+"&p="+product_id;
+	cssNode.href = this.urlBase+"frmupload/css?c="+company_id+"&sp="+product_id;
 	cssNode.media = 'screen';
 	headID.appendChild(cssNode);
 	
