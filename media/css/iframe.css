@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+img#top_img{
+	float:left;
+	position:relative;
+	top:0px;
+	left:0px;
+	z-index:100;
+}
+
+img#base_img{
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:0;
+}
+
+div#images{
+	position:relative;
+}
