@@ -91,6 +91,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init(array(
 	'base_url'   => '/shopify_custom_image/',
+	'index_file' => FALSE,
 ));
 
 /**
