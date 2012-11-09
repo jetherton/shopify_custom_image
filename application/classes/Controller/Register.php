@@ -26,7 +26,7 @@ class Controller_Register extends Controller_Main {
 		$auth = Auth::instance();		
 		if( $auth->logged_in() OR $auth->auto_login())
 		{
-			$this->request->redirect(Session::instance()->get_once('returnUrl','home'));
+			HTTP::redirect(Session::instance()->get_once('returnUrl','home'));
 		}
 		$this->template->header->menu_page = "register";
 		$this->template->html_head->title = __("register");
