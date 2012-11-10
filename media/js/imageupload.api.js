@@ -1,7 +1,20 @@
 var universalUp = null;
 
-function Uploader(elementId, company_id, product_id)
+function Uploader(elementId, company_id, product_id, count)
 {
+	//how many images have we uploaded so far?
+	if(typeof count == "undefined" || count==null || count == '')
+	{
+		this.count = 0;
+	}
+	else
+	{
+		this.count = parseInt(count);
+	}
+	
+	//increment the count counting ourselves
+	this.count++;
+
 	this.makeGUID = function  ()
 	{
 	    var S4 = function ()
@@ -46,22 +59,23 @@ function Uploader(elementId, company_id, product_id)
 	this.iframe = document.createElement("iframe");
 	this.iframe.id = "cstm_img_frm" + company_id + "_" + product_id;
 	this.iframe.className += "cstm_img_frm";
-	this.iframe.src= this.urlBase+"frmupload?c="+company_id+"&p="+product_id+"&g="+this.guid;
+	this.iframe.src= this.urlBase+"frmupload?c="+company_id+"&sp="+product_id+"&g="+this.guid;
 	rootElement.appendChild(this.iframe);
 	
-	//set the gloabal point to this		
-	universalUp = this;
+	//create the custom fields that pass our info on to the cart
+	this.guidInput = document.createElement("input");
+	this.guidInput.id = "cstm_img_guid_" + product_id;
+	this.guidInput.name = "properties[cstm_img_guid]";
+	this.guidInput.value = this.guid;
+	this.guidInput.type = "hidden";
+	rootElement.appendChild(this.guidInput);
 	
+	//create the custom fields that updates the count
+	this.countInput = document.createElement("input");
+	this.countInput.id = "upimgcount";
+	this.countInput.name = "attributes[upimgcount]";
+	this.countInput.value = this.count;
+	this.countInput.type = "hidden";
+	rootElement.appendChild(this.countInput);
 
-	
-	this.getCstmFileData = function() 
-	{
-		//finish this
-	};
-		
-	//date call back
-	this.setCstmFileData = function(date) 
-	{
-			//need to finish
-	};
 }

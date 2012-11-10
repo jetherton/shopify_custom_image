@@ -109,9 +109,18 @@ class Controller_Frmupload extends Controller_Main {
 		$this->auto_render = FALSE;
 		
 		$company_id = intval($_GET['c']);
-		$product_id = intval($_GET['p']);
-	
-		$product = ORM::factory('Product', $product_id);
+		$product_id = isset($_GET['p']) ? $_GET['p']: 0;
+		$shopify_product_id = isset($_GET['sp']) ? $_GET['sp']: 0;
+		if($product_id !== 0)
+		{
+			$product = ORM::factory('Product', $product_id);
+		}
+		else
+		{
+			$product = ORM::factory('Product')
+				->where('variant_id', '=',$shopify_product_id)
+				->find();
+		}
 		
 		
 		
@@ -135,7 +144,7 @@ class Controller_Frmupload extends Controller_Main {
 	
 		if ($file = Upload::save($image, NULL, $directory))
 		{
-			$filename = 'order-'.$order->id.'.png';
+			$filename = 'order-'.$order->GUID.'.png';
 	
 			if(file_exists($directory.$filename))
 			{
