@@ -103,3 +103,9 @@ ALTER TABLE  `products` ADD  `parent_CSS` LONGTEXT NULL;
 ALTER TABLE  `products` CHANGE  `CSS`  `iframe_CSS` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 ALTER TABLE  `purchases` ADD  `GUID` CHAR(255) NOT NULL;
 
+/**2012-11-12 Create a numeric value that tells how special a given role is. Higher the number, the more special you are*/
+ALTER TABLE  `roles` ADD  `level` INT( 11 ) UNSIGNED NOT NULL;
+UPDATE  `roles` SET  `level` =  '50' WHERE  `roles`.`id` =1;
+UPDATE  `roles` SET  `level` =  '100' WHERE  `roles`.`id` =2;
+
+

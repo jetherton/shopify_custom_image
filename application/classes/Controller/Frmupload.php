@@ -88,7 +88,16 @@ class Controller_Frmupload extends Controller_Main {
 			$css_view = View::factory('css_view');
 			$css_view->css = $product->iframe_CSS;
 			$this->template->html_head = $css_view;
-			$this->template->html_head .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'media/css/iframe.css">'; 
+			$this->template->html_head .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'media/css/iframe.css">';
+			if($order != null)
+			{
+				$this->template->html_head .= '<script type="text/javascript" src="'.URL::base().'media/js/jquery.min.js"></script>';
+				$js_view = View::factory('upload_js');
+				$js_view->order_id = $order->id;
+				$js_view->guid = $guid;
+				$this->template->html_head .= $js_view;
+			} 
+			
 			$this->template->content = View::factory('upload');
 			$this->template->content->order = $order;
 			$this->template->content->guid = $guid;
@@ -97,6 +106,44 @@ class Controller_Frmupload extends Controller_Main {
 			$this->template->content->product = $product;
 		
 	}
+	
+	
+	
+	
+	public function action_user_view()
+	{
+	
+		$order = null;
+	
+
+		$guid = isset($_GET['g']) ? $_GET['g']: 0;
+	
+		if($guid === 0)
+		{
+			echo "no GUID";
+			exit;
+		}
+
+		$order = ORM::factory('Order')
+			->where('GUID', '=', $guid)
+			->find();
+	
+		if(!$order->loaded())
+		{
+			exit;
+		}
+	
+		$product = ORM::factory('Product', $order->product_id);
+		
+			
+		$this->template->content = View::factory('user_order_view');
+		$this->template->content->order = $order;
+		$this->template->content->guid = $guid;
+		$this->template->content->product = $product;
+	
+	}
+	
+	
 	
 	public function action_css()
 	{
@@ -127,6 +174,44 @@ class Controller_Frmupload extends Controller_Main {
 		echo $product->parent_CSS;
 		exit;
 		
+	}
+	
+	
+	public function action_position()
+	{
+		
+	
+		//we'll render out selves
+		$this->template = '';
+		$this->auto_render = FALSE;
+	
+		
+		$order_id = isset($_GET['o']) ? $_GET['o']: 0;
+		$position = isset($_GET['p']) ? $_GET['p']: null;
+		$direction = isset($_GET['d']) ? $_GET['d']: null;
+		
+		if($order_id !== 0 AND $position != null AND $direction != null)
+		{
+			$order = ORM::factory('Order', $order_id);
+			if($direction == "left")
+			{
+				$order->x_offset = $position;				
+			}
+			else
+			{
+				$order->y_offset = $position;
+			}
+			$order->save();
+			echo "success";
+			exit;
+		}
+		
+	
+	
+	
+		echo "invalid input";
+		exit;
+	
 	}
 	
 	

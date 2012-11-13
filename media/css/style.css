@@ -1,1 +1,18 @@
 @CHARSET "UTF-8";
+
+td.label_column{
+	
+}
+
+table#order_detail_table{
+	border-collapse:collapse;
+}
+
+table#order_detail_table tr td{
+	border:solid 1px #333;
+	padding: 10px 10px;
+}
+
+img.original{
+	border:solid 1px #333;
+}

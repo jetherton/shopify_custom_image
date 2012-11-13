@@ -26,8 +26,8 @@ class Helper_Mainmenu
 		if($user != null)
 		{
 			$login_role = ORM::factory('Role')->where("name", "=", "login")->find();
-
-			if($user->has('roles', $login_role))
+			$admin_role = ORM::factory('Role')->where("name", "=", "admin")->find();
+			if($user->has('roles', $login_role) AND !$user->has('roles', $admin_role))
 			{
 				
 				// home page
@@ -39,17 +39,28 @@ class Helper_Mainmenu
 				{
 					echo '<li>';
 				}
-				echo '<a href="'.url::base().'main">'.__("home").'</a></li>';
+				echo '<a href="'.url::base().'companies/edit?id='.$user->company_id.'">'.__("home").'</a></li>';
 			}
 		
 		
 		
 			
 			//see if the given user is an admin, if so they can do super cool stuff
-			$admin_role = ORM::factory('Role')->where("name", "=", "admin")->find();
+			
 			if($user->has('roles', $admin_role))
 			{
 				$end_div = false;
+				// home page
+				if($page == "home")
+				{
+					echo '<li class="selected">';
+				}
+				else
+				{
+					echo '<li>';
+				}
+				echo '<a href="'.url::base().'main">'.__("home").'</a></li>';
+				
 				if($page == "companies")
 				{
 					echo '<li class="adminmenu selected">';

@@ -9,8 +9,15 @@
 		<?php if($order != null) {?>
 			<img id="top_img" style="top:<?php echo $order->y_offset;?>px;left:<?php echo $order->x_offset;?>px;" width="<?php echo $order->width;?>" height="<?php echo $order->height;?>" src="<?php echo URL::base(); ?>uploads/<?php echo $order->image;?>"/>
 			<?php echo Form::hidden('order_id',$order->id, array('id'=>'order_id')); ?>	
-		<?php }?>
+		<?php }?>		
 	</div>
+	<?php if($order != null) {?>
+		Adjust image position: 
+		<a href="#" onclick="imgMove('up'); return false;">Up</a>
+		<a href="#" onclick="imgMove('down'); return false;">Down</a> 
+		<a href="#" onclick="imgMove('left'); return false;">Left</a> 
+		<a href="#" onclick="imgMove('right'); return false;">Right</a>  
+	<?php }?>		
 	<p id="product_description"><?php echo $product->description;?></p>
 	<label for="file">Image:</label>
 	<?php echo Form::file('image', array('id'=>'image')); ?> 

@@ -144,10 +144,12 @@
 			<?php echo $order->date;?>
 		</td>
 		<td style="width:400px;">
+		<a href="<?php echo url::base(); ?>orders?g=<?php echo $order->GUID;?>">
 			<img src="<?php echo url::base().'uploads/'. $order->image;?>" height="<?php echo $order->height;?>" width="<?php echo $order->width;?>"/>
+		</a>
 		</td>		
 		<td style="width:200px;">
-			<a href="<?php echo url::base(); ?>orders?id=<?php echo $order->id;?>"> <?php echo __('view details');?></a>
+			<a href="<?php echo url::base(); ?>orders?g=<?php echo $order->GUID;?>"> <?php echo __('view details');?></a>
 			<a href="#" onclick="deleteOrder(<?php echo $order->id?>);"> <?php echo __('delete');?></a>
 		</td>
 	</tr>

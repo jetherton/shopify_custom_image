@@ -30,6 +30,22 @@ class Controller_Admin extends Controller_Main {
 				HTTP::redirect('register/verify');
 			}
 			*/
+			
+			
+			//find the highest role this user has
+			$roles = ORM::factory('Role')
+				->join('roles_users')
+				->on('roles_users.role_id', '=', 'role.id')
+				->where('user_id', '=', $this->user->id)
+				->find_all();
+			$this->role = null;
+			foreach($roles as $r)
+			{
+				if($this->role == null OR $this->role->level < $r->level)
+				{
+					$this->role = $r;
+				}
+			}
 		}
 		//if not send them to the login page
 		else
@@ -53,7 +69,7 @@ class Controller_Admin extends Controller_Main {
 	
 		$this->template->html_head->title = __("home");
 		$this->template->header->menu_page = "home";
-		$this->template->content = "hi you're an admin";
+		$this->template->content = "hi you're logged in";
 		
 	
 	

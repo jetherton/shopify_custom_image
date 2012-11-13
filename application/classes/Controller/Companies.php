@@ -15,6 +15,12 @@ class Controller_Companies extends Controller_Admin {
 	*/
 	public function action_index()
 	{
+		
+		if($this->role->name != 'admin')
+		{
+			HTTP::redirect('companies/edit?id='.$this->user->company_id);
+		}
+		
 		/***** initialize stuff****/
 		//The title to show on the browser
 		$this->template->html_head->title = __("Companies");
@@ -102,9 +108,19 @@ class Controller_Companies extends Controller_Admin {
 		{
 			$company = null;
 			$is_add = "true";
+			if($this->role->name != 'admin')
+			{
+				HTTP::redirect('companies/edit?id='.$this->user->company_id);
+			}
 		}
 		else
 		{
+			
+			if($this->role->name != 'admin' AND $this->user->company_id != $id)
+			{
+				HTTP::redirect('companies/edit?id='.$this->user->company_id);
+			}
+			
 			$is_add = "false";
 			//get the form
 			$company = ORM::factory('Company', $id);

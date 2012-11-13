@@ -50,6 +50,11 @@ class Controller_Products extends Controller_Admin {
 				HTTP::redirect('companies');
 			}
 			$data['company_id'] = $company_id;
+			//is the user part of this company or an admin
+			if($this->role->name != 'admin' AND $this->user->company_id != $company_id)
+			{
+				HTTP::redirect('companies/edit?id='.$company_id);
+			}
 		}
 		else
 		{
@@ -61,6 +66,11 @@ class Controller_Products extends Controller_Admin {
 			if(!$product->loaded())
 			{
 				HTTP::redirect('companies');
+			}
+			
+			if($this->role->name != 'admin' AND $this->user->company_id != $product->company_id)
+			{
+				HTTP::redirect('companies/edit?id='.$product->company_id);
 			}
 		
 		}
