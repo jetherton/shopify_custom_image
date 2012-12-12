@@ -16,3 +16,11 @@ table#order_detail_table tr td{
 img.original{
 	border:solid 1px #333;
 }
+
+a.button{
+	background:grey;
+	padding:10px;
+	font-size:15px;
+	margin:5px;
+	color:white;
+}
