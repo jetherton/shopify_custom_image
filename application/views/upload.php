@@ -16,12 +16,17 @@
 		<a href="#" onclick="imgMove('up'); return false;">Up</a>
 		<a href="#" onclick="imgMove('down'); return false;">Down</a> 
 		<a href="#" onclick="imgMove('left'); return false;">Left</a> 
-		<a href="#" onclick="imgMove('right'); return false;">Right</a>  
+		<a href="#" onclick="imgMove('right'); return false;">Right</a>
+		<br/>  
 	<?php }?>		
 	<p id="product_description"><?php echo $product->description;?></p>
-	<label for="file">Image:</label>
-	<?php echo Form::file('image', array('id'=>'image')); ?> 
+	<?php if($order == null) {?>
+		<label for="file">Image:</label>
+	<?php } else {?>
+		<label for="file">Choose new Image:</label>
+	<?php }?>
+	<?php echo Form::file('image', array('id'=>'image', 'onchange'=>"$('#upload_button').show('slow');")); ?> 
 	<br />
 	<?php echo Form::hidden('GUID',$guid, array('id'=>'GUID')); ?>
-	<?php echo Form::submit('submit', __('Upload'), array('id'=>'upload_button'));?>
+	<?php echo Form::submit('submit', __('Upload'), array('id'=>'upload_button', 'style'=>'display:none;'));?>
 <?php echo Form::close(); ?>

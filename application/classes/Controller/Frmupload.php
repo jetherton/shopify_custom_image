@@ -89,9 +89,9 @@ class Controller_Frmupload extends Controller_Main {
 			$css_view->css = $product->iframe_CSS;
 			$this->template->html_head = $css_view;
 			$this->template->html_head .= '<link rel="stylesheet" type="text/css" href="'.URL::base().'media/css/iframe.css">';
+			$this->template->html_head .= '<script type="text/javascript" src="'.URL::base().'media/js/jquery.min.js"></script>';
 			if($order != null)
 			{
-				$this->template->html_head .= '<script type="text/javascript" src="'.URL::base().'media/js/jquery.min.js"></script>';
 				$js_view = View::factory('upload_js');
 				$js_view->order_id = $order->id;
 				$js_view->guid = $guid;
