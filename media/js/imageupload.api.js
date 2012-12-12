@@ -57,16 +57,19 @@ function Uploader(elementId, company_id, product_id, variantSelectorId, variantV
 		this.iframe = document.createElement("iframe");
 		this.iframe.id = "cstm_img_frm" + company_id + "_" + product_id;
 		this.iframe.className += "cstm_img_frm";
+		this.iframe.scrolling="no";
 		this.iframe.src= this.urlBase+"frmupload?c="+company_id+"&sp="+product_id+"&g="+this.guid;
 		rootElement.appendChild(this.iframe);
 		
 		//create the custom fields that pass our info on to the cart
+		//this must be appended to the inupt for id="product-actions" 
+		var productActionsForm  = document.getElementById("product-actions");	
 		this.guidInput = document.createElement("input");
 		this.guidInput.id = "cstm_img_guid_" + product_id;
 		this.guidInput.name = "properties[cstm_img_guid]";
 		this.guidInput.value = this.guid;
 		this.guidInput.type = "hidden";
-		rootElement.appendChild(this.guidInput);
+		productActionsForm.appendChild(this.guidInput);
 	}
 	
 	this.deInit = function()
@@ -75,7 +78,8 @@ function Uploader(elementId, company_id, product_id, variantSelectorId, variantV
 		{
 			var rootElement = document.getElementById(elementId);			
 			rootElement.removeChild(this.iframe);
-			rootElement.removeChild(this.guidInput);
+			var productActionsForm  = document.getElementById("product-actions");	
+			productActionsForm.removeChild(this.guidInput);
 			this.iframe = null;
 			this.guidInput = null;
 			
