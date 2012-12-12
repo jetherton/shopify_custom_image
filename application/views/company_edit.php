@@ -56,6 +56,7 @@
 	echo Form::open(NULL, array('id'=>'edit_company_form')); 
 	echo Form::hidden('action','edit', array('id'=>'action'));
 	echo Form::hidden('company_id','0', array('id'=>'company_id'));
+	echo Form::hidden('product_id','0', array('id'=>'product_id'));
 	echo '<table><tr><td>';
 	echo Form::label('name', __('Name').": ");
 	echo '</td><td>';

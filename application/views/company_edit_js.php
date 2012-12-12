@@ -17,7 +17,7 @@
 		{
 			$("#product_id").val(id);
 			$("#action").val('delete_product');
-			$("#edit_form_form").submit();
+			$("#edit_company_form").submit();
 		}
 	}
 

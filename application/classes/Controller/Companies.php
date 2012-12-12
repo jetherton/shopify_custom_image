@@ -188,7 +188,7 @@ class Controller_Companies extends Controller_Admin {
 				
 				else if($_POST['action'] == 'delete_product')
 				{
-					Model_Formfields::delete_formfield($_POST['form_id']);
+					Model_Product::delete_product($_POST['product_id']);
 				}
 				
 				HTTP::redirect('companies/edit?id='.$company->id.'&status=saved');

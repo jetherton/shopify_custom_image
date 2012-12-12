@@ -10,7 +10,7 @@
 <h2><?php echo $header; if($data['id']!=0){echo " - Product ID: ".$data['id']."";	} ?></h2>
 <p><?php echo __("Product edit explanation");?></p>
 
-<a class="button" id="add_back_to_companies" href="<?php echo url::base(); ?>companies/edit?id=<?php echo $data['company_id'];?>"><?php echo __('back to companies');?></a>
+<a class="button" id="add_back_to_companies" href="<?php echo url::base(); ?>companies/edit?id=<?php echo $data['company_id'];?>"><?php echo __('back to') . ' '. ORM::factory('Company', $data['company_id'])->name;?></a>
 
 <?php if(count($errors) > 0 )
 {
