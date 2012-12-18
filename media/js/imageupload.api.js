@@ -70,6 +70,13 @@ function Uploader(elementId, company_id, product_id, variantSelectorId, variantV
 		this.guidInput.value = this.guid;
 		this.guidInput.type = "hidden";
 		productActionsForm.appendChild(this.guidInput);
+		
+		this.iframeInput = document.createElement("input");
+		this.iframeInput.id = "cstm_img_iframe_" + product_id;
+		this.iframeInput.name = "properties[cstm_img_iframe]";
+		this.iframeInput.value = '<iframe style="width:100%;height:290px;"id="{{p.last}}" class="image_upload_preview" src="http://ethertontech.com/dev/superimpose/frmupload/user_view?download=true&g='+this.guid+'"></iframe>';
+		this.iframeInput.type = "hidden";
+		productActionsForm.appendChild(this.iframeInput);
 	}
 	
 	this.deInit = function()
@@ -80,6 +87,7 @@ function Uploader(elementId, company_id, product_id, variantSelectorId, variantV
 			rootElement.removeChild(this.iframe);
 			var productActionsForm  = document.getElementById("product-actions");	
 			productActionsForm.removeChild(this.guidInput);
+			productActionsForm.removeChild(this.iframeInput);
 			this.iframe = null;
 			this.guidInput = null;
 			

@@ -117,6 +117,9 @@ class Controller_Frmupload extends Controller_Main {
 	
 
 		$guid = isset($_GET['g']) ? $_GET['g']: 0;
+		
+		//if it's setup so the admin can download the original image
+		$downloadable = isset($_GET['download']);
 	
 		if($guid === 0)
 		{
@@ -139,6 +142,7 @@ class Controller_Frmupload extends Controller_Main {
 		$this->template->content = View::factory('user_order_view');
 		$this->template->content->order = $order;
 		$this->template->content->guid = $guid;
+		$this->template->content->downloadable = $downloadable;
 		$this->template->content->product = $product;
 	
 	}
