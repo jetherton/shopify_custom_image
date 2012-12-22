@@ -118,7 +118,7 @@ function Uploader(elementId, company_id, product_id, variantSelectorId, variantV
 		this.variantSelector = document.getElementById(variantSelectorId);
 		if(this.variantSelector != null)
 		{
-			this.variantSelector.onchange = function()
+			$("#"+this.variantSelectorId).change(function()
 			{
 				//if it equals the value
 				if(This.variantSelector.value == This.variantValue)
@@ -130,7 +130,9 @@ function Uploader(elementId, company_id, product_id, variantSelectorId, variantV
 				{
 					This.deInit();
 				}
-			};
+				
+				return true;
+			});
 		}
 	}
 }
